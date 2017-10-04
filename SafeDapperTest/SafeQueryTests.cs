@@ -8,6 +8,12 @@ using System.Linq;
 using System.Reflection;
 using SafeDapper;
 
+/// <summary>
+/// If you don't have MS office installed, you'll likely need to install the office drivers to read the excel sheet test file w/out having actual office installed
+/// https://www.microsoft.com/en-us/download/confirmation.aspx?id=23734
+/// or included in this checkin, a version that works on windows 7 x64 through Windows 10.
+/// </summary>
+
 namespace SafeDapperTest
 {
     [TestClass]
