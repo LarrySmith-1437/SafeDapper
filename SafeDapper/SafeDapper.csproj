@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>All Honor and glory to the initial authors of Dapper, lightweight</Description>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Reflection;
 using Dapper;
+using System.Collections.Generic;
 
 namespace SafeDapper
 {
     class ThrowWhenNullTypeMap<T>:SqlMapper.ITypeMap
     {
-        private readonly SqlMapper.ITypeMap _defaultTypeMap = new DefaultTypeMap(typeof(T));
+        private readonly ColumnAttributeTypeMapper<T> _defaultTypeMap = new ColumnAttributeTypeMapper<T>();
 
         public ConstructorInfo FindConstructor(string[] names, Type[] types)
         {
@@ -25,7 +26,12 @@ namespace SafeDapper
 
         public SqlMapper.IMemberMap GetMember(string columnName)
         {
-            var member = _defaultTypeMap.GetMember(columnName);
+            List<SqlMapper.ITypeMap> fallbackMappers = new List<SqlMapper.ITypeMap>();
+            fallbackMappers.Add(_defaultTypeMap);
+
+            FallbackTypeMapper fallbackMapper = new FallbackTypeMapper(fallbackMappers);
+
+            var member = fallbackMapper.GetMember(columnName);
             if (member == null)
             {
                 throw new DapperObjectMappingException($"Column {columnName} could not be mapped to object.");
