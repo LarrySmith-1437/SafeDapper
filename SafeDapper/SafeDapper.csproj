@@ -3,6 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>All Honor and glory to the initial authors of Dapper, lightweight</Description>
+    <SignAssembly>false</SignAssembly>
+    <Version>2.0.35</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/LarrySmith-1437/SafeDapper</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/LarrySmith-1437/SafeDapper</RepositoryUrl>
+    <PackageTags>Dapper Safe Mapping</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
