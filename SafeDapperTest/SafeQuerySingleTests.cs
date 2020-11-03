@@ -1,12 +1,9 @@
-﻿using System;
-using System.CodeDom;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SafeDapper;
 using System.Data;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.OleDb;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using SafeDapper;
 
 /// <summary>
 /// If you don't have MS office installed, you'll likely need to install the office drivers to read the excel sheet test file w/out having actual office installed
@@ -24,11 +21,11 @@ namespace SafeDapperTest
         [ExpectedException(typeof(DapperObjectMappingException))]
         public void SafeQuerySingleThrowsExceptionWhenColumnNotMapped()
         {
-            var currentAssemblyDirectory =Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); // System.Reflection.Assembly.GetEntryAssembly();
+            var currentAssemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); // System.Reflection.Assembly.GetEntryAssembly();
             var fullPath = Path.Combine(currentAssemblyDirectory, _testFile);
             var connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\"{fullPath}\";Extended Properties=\"Excel 12.0 Xml;HDR=Yes;IMEX=1;\"";
 
-            var exists = File.Exists(fullPath);
+            Assert.IsTrue(File.Exists(fullPath));
             using (var conn = new OleDbConnection(connString))
             {
                 conn.Open();
@@ -45,7 +42,7 @@ namespace SafeDapperTest
             var fullPath = Path.Combine(currentAssemblyDirectory, _testFile);
             var connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\"{fullPath}\";Extended Properties=\"Excel 12.0 Xml;HDR=Yes;IMEX=1;\"";
 
-            var exists = File.Exists(fullPath);
+            Assert.IsTrue(File.Exists(fullPath));
             using (var conn = new OleDbConnection(connString))
             {
                 conn.Open();
@@ -55,7 +52,8 @@ namespace SafeDapperTest
                 Assert.IsNotNull(result);
                 Assert.AreEqual(1, result.ColumnA);
                 Assert.AreEqual(2, result.ColumnB);
-                Assert.AreEqual(3, result.ColumnC);            }
+                Assert.AreEqual(3, result.ColumnC);
+            }
         }
 
     }
